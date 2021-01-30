@@ -6,7 +6,7 @@ using System.Text;
 
 namespace PudelkoLib
 {
-    public sealed class Pudelko
+    public sealed class Pudelko : IComparable<Pudelko>, IEnumerable<Pudelko>, IEquatable<Pudelko>
     {
         private readonly double a, b, c;
         public double A { get; set; }
@@ -101,6 +101,41 @@ namespace PudelkoLib
                 throw new FormatException();
             }
         }
-        
+        public override bool Equals(object obj)
+        {
+            if (obj is Pudelko)
+            {
+                return Equals((Pudelko) obj);
+            }
+
+            return base.Equals(obj);
+        }
+        public bool Equals(Pudelko pudelko)
+        {
+            return (Pole == pudelko.Pole && Objetosc == pudelko.Objetosc);
+        }
+
+        public override int GetHashCode()
+        {
+            return A.GetHashCode() + B.GetHashCode() + C.GetHashCode() + unit.GetHashCode();
+        }
+         public int CompareTo(Pudelko other) {
+            double objetoscP1 = Objetosc, objetoscP2 = other.Objetosc;
+            if(objetoscP1 == objetoscP2) {
+                double poleP1 = Pole, poleP2 = other.Pole;
+                if(Pole == poleP2) {
+                    double sumP1 = A + B + C, sumP2 = other.A + other.B + other.C;
+                    if(sumP1 == sumP2) {
+                        return 0;
+                    }
+                    return sumP1 < sumP2 ? 1 : -1;
+                }
+                return (poleP1 < poleP2) ? 1 : -1;
+            }
+
+            return (objetoscP1 < objetoscP2) ? 1 : -1;
+            throw new NotImplementedException();
+        }
+
     }
 }
