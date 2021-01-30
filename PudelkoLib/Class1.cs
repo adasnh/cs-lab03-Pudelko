@@ -8,7 +8,7 @@ namespace PudelkoLib
 {
     public sealed class Pudelko
     {
-        private double a, b, c;
+        private readonly double a, b, c;
         public double A { get; set; }
         public double B { get; set; }
         public double C { get; set; }
@@ -74,6 +74,33 @@ namespace PudelkoLib
                 return number;
             }
         }
-
+        public override string ToString()
+        {
+            return this.ToString("m");
+        }
+        public string ToString(string format)
+        {
+            return this.ToString(format, null);
+        }
+         public string ToString(string format, IFormatProvider formatProvider)
+        {
+            if(format == "mm")
+            {
+                return $"{a} mm × {b} mm × {c} mm";
+            }
+            if(format == "cm")
+            {
+                return $"{a / 10} mm × {b / 10} mm × {c / 10} mm";
+            }
+            if(format == "m")
+            {
+                return $"{a / 1000} mm × {b / 1000} mm × {c / 1000} mm";
+            }
+            else
+            {
+                throw new FormatException();
+            }
+        }
+        
     }
 }

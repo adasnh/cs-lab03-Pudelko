@@ -6,8 +6,11 @@ namespace PudelkoLib
 {
     public enum UnitOfMeasure
     {
-        meter,
-        centimeter,
-        milimeter
+   
+            milimeter,
+            centimeter,
+            meter
     }
+
+    
 }
